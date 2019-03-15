@@ -24,6 +24,31 @@ class Home extends React.Component {
     });
   }
 
+  handlePaymentClick = (e)=>{
+    var options = {
+      "key": "rzp_test_wPjl0sojlA2WjB",
+      "amount": "12000", // 2000 paise = INR 20
+      "name": "Chocomama",
+      "description": "It's the Cloud Nine",
+      "image": `/image.jpg`,
+      "handler": function (response){
+          alert(`Thanks for the order!`);
+      },
+      "prefill": {
+          "name": "Sanket Patel",
+          "email": "test@test.com"
+      },
+      "notes": {
+          "address": "Hello World"
+      },
+      "theme": {
+          "color": "#F37254"
+      }
+  };
+  var rzp1 = new window.Razorpay(options);
+  rzp1.open();
+    e.preventDefault();
+  }
   render() {
     const { homeData } = this.state;
     return (
@@ -38,12 +63,7 @@ class Home extends React.Component {
               <div className="col-md-12">
                 <h2 className="mb-5 text-black">Want To Buy?</h2>
                 <p className="mb-0">
-                  <Link
-                    to="/dashboard"
-                    className="btn btn-primary py-3 px-5 text-white"
-                  >
-                    Book Now
-                  </Link>
+                  <button id="rzp-button1" onClick={this.handlePaymentClick}  className="btn btn-primary py-3 px-5 text-white" onClick={this.handlePaymentClick}>Buy Now</button>
                 </p>
               </div>
             </div>
